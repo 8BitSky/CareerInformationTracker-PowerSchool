@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Career Information Tracker Created by Cruise Slater - v1.0.5 01/27/17  -->
+    <title>New Certificate</title>
+    ~[wc:UI_js_includes] ~[wc:commonscripts]
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="/images/css/print.css" rel="stylesheet" media="print">
+    <SCRIPT LANGUAGE="JavaScript">
+        <!-- Begin
+        function formHandler(form) {
+            var URL = document.navigation.page.options[document.navigation.page.selectedIndex].value;
+            window.location.href = URL;
+        }
+        // End -->
+    </SCRIPT>
+
+</head>
+<!--NoLink-->
+
+<body onload="popDate('dateField')">
+
+    <body>
+
+        ~[wc:teachers_header_fr_css]
+
+        <span class="account-photo">~[studenttitlephoto]</span>
+        <h1>New Certificate<!--<span class="nav-teacher"><select name="page" size=1 onChange="javascript:formHandler()"><option value="">~[text]psx.html.teachers_studentpages.logentry.select_screens[/text]<option value="">--------------------~[x:teacherpages]</select></span>-->~[studentalert]</h1>
+        <p>~(studentname) &nbsp; ~(grade_level) &nbsp; ~([01]student_number) &nbsp; &nbsp; ~[wc:teachers_student_alert_css] &nbsp; &nbsp; ~(studschoolabbr) &nbsp; &nbsp; ~[enrollmentstatus]</p>
+        </form>
+
+        <!--Start OF Form-->
+        <form id="new_certificate" action="/teachers/studentpages/CareerInformationPT.html?frn=~(frn)" method="POST">
+            <!-- start of content and bounding box -->
+            <div class="box-round"> ~[DirectTable.Select:U_CERTIFICATES;ID:-1]
+                <!-- Using hard-coded -1 because this is a new record -->
+                <fieldset id="newCertificate">
+                    <legend>Certificate Details</legend>
+                    <div>
+                        <label style="width: 140px">Certificate:</label>
+                        <input type="text" name="[U_CERTIFICATES]certificateName" value="" id="certificateName" size="100" /> </div>
+                    <div>
+                        <label style="width: 140px">Cert. Level:</label>
+                        <input type="text" name="[U_CERTIFICATES]certLevel" value="" id="certLevel" size="50" /> </div>
+                    <div>
+                        <label style="width: 140px">Web Link:</label>
+                        <input type="text" name="[U_CERTIFICATES]certURL" value="" id="certURL" size="200" /> </div>
+                    <div>
+                        <label style="width: 140px">Credit Hours:</label>
+                        <input type="text" name="[U_CERTIFICATES]creditHours" value="" id="creditHours" size="4" /> </div>
+                    <div>
+                        <label style="width: 140px">Completion Date:</label>
+                        <input type="text" name="[U_CERTIFICATES]completionDate" value="" id="completionDate" /> </div>
+                    <div>
+                        <label style="width: 140px">Expiry Date:</label>
+                        <input type="text" name="[U_CERTIFICATES]expiryDate" value="" id="expiryDate" /> </div>
+                    <div>
+                        <label style="width: 140px">Course Affiliation:</label>
+                        <input type="text" name="[U_CERTIFICATES]certCourse" value="" id="certCourse" size="50" /> </div>
+                    <div>
+                        <label style="width: 140px">Notes:</label>
+                        <textarea name="[U_CERTIFICATES]certComment" cols="50" rows="5" id="certComment" /> </div>
+                    <div class="button-row">
+                        <a href="/teachers/studentpages/CareerInformationPT.html?frn=~(frn)"class="button">Back</a>
+                        <input type="hidden" name="ac" value="webasmt" />~[submitbutton]
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </body>
+
+</html>

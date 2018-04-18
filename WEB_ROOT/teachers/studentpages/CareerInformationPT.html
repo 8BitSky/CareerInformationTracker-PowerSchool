@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Career Information</title>
+    <!-- required scripts -->
+    <!-- Career Information Tracker Created by Cruise Slater - v1.0.5 01/27/17  -->
+    ~[wc:commonscripts]
+    <!-- Required style sheets: screen.css, and print.css -->
+    <link href="/images/css/screen.css" rel="stylesheet" media="screen">
+    <link href="/images/css/print.css" rel="stylesheet" media="print">
+    <script type="text/javascript">
+        <!-- Begin
+        function formHandler(form) {
+            var URL = document.navigation.page.options[document.navigation.page.selectedIndex].value;
+            window.location.href = URL;
+        }
+        // End -->
+    </script>
+</head>
+
+<body class="psteacher">
+
+    ~[wc:teachers_header_fr_css]
+
+
+    <form name="navigation"><span class="account-photo">~[studenttitlephoto]</span>
+        <h1>Career Information<span class="nav-teacher"><select name="page" size=1 onChange="javascript:formHandler()"><option value="">Select screens<option value="">--------------------~[x:teacherpages]</select></span>~[studentalert]</h1>
+        <p>~(studentname) &nbsp; ~(grade_level) &nbsp; ~(student_number) &nbsp; &nbsp; ~(track) &nbsp; &nbsp; ~(studschoolabbr) &nbsp; &nbsp; ~[enrollmentstatus]</p>
+    </form>
+
+    <!-- start of content and bounding box -->
+    <p style="text-align: right"> <a href="CareerInformationPT-NewCert.html?frn=~(studentfrn)" id="btnNew" name="btnNew" class="button">New Certificate</a><a href="CareerInformationPT-NewVol.html?frn=~(studentfrn)" id="btnNew" name="btnNew" class="button">New Volunteer Exp.</a> </p>
+    <div class="tabs">
+        <ul class="group">
+            <li><a href="#SecondaryApplications">Secondary Applications</a></li>
+            <li><a href="#Certificates">Certificates</a></li>
+            <li><a href="#Volunteerism">Volunteerism</a></li>
+        </ul>
+        <div id="SecondaryApplications">
+            <table class="grid" id="applicationsTable">
+                <thead>
+                    <tr style="border:1px solid grey;">
+                        <th class="bold" width="5%">ID</th>
+                        <th class="bold" width="20%">Institution</th>
+                        <th class="bold" width="10%">Request Date</th>
+                        <th class="bold" width="5%">Application Status</th>
+                        <th class="bold" width="5%">Scholarship?</th>
+                        <th class="bold" width="10%">Completion Date</th>
+                        <th class="bold" width="10%">Institute Outcome</th>
+                        <th class="bold" width="10%">Student Decision</th>
+                        <th class="bold" width="25%">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ~[tlist_sql; select ID, Institution, requestDate, CASE appStatus WHEN '1' THEN 'Meeting with student' WHEN '2' THEN 'Working on application' WHEN '3' THEN 'Completed (Not Submitted)' WHEN '4' THEN 'Submitted' ELSE '' END appStatus, CASE to_char(scholarship) WHEN '1' THEN 'Yes' ELSE 'No' END scholarship, completionDate, CASE instituteOutcome WHEN '1' THEN 'Awaiting Response' WHEN '2' THEN 'Condtional Acceptance' WHEN '3' THEN 'Accepted' WHEN '4' THEN 'Rejected' ELSE '' END instituteOutcome, CASE studentDecision WHEN '1' THEN 'Awaiting Response' WHEN '2' THEN 'Considering' WHEN '3' THEN 'Accepting' WHEN '4' THEN 'Rejecting' ELSE '' END studentDecision, appComment FROM U_SECONDARYAPPLICATIONS SA WHERE StudentsDCID = ~(rn) ORDER BY ID]
+                    <tr>
+                        <td>~(ID)</td>
+                        <td>~(Institution)</td>
+                        <td>~(requestDate;d)</td>
+                        <td>~(appStatus)</td>
+                        <td>~(scholarship)</td>
+                        <td>~(completionDate;d)</td>
+                        <td>~(instituteOutcome)</td>
+                        <td>~(studentDecision)</td>
+                        <td>~(appComment)</td>
+                    </tr> [/tlist_sql] </tbody>
+            </table>
+            <table class="grid" id="scholarshipsTable">
+                <thead>
+                    <tr style="border:1px solid grey;">
+                        <th class="bold" width="5%">ID</th>
+                        <th class="bold" width="20%">Scholarship</th>
+                        <th class="bold" width="20%">Website</th>
+                        <th class="bold" width="10%">Monetary Value</th>
+                        <th class="bold" width="5%">Submitted?</th>
+                        <th class="bold" width="10%">Awarded?</th>
+                        <th class="bold" width="30%">Conditions</th>
+                    </tr>
+                </thead>
+                <tbody>~[tlist_sql; select ID, scholarship, scholarURL, scholarValue, CASE to_char(submitted) WHEN '1' THEN 'Yes' ELSE 'No' END submitted, CASE to_char(awarded) WHEN '1' THEN 'Yes' ELSE 'No' END awarded, conditions FROM U_SCHOLARSHIP SS WHERE StudentsDCID = ~(rn) ORDER BY ID]
+                    <tr>
+                        <td>~(ID)</td>
+                        <td>~(scholarship)</td>
+                        <td>~(scholarURL)</td>
+                        <td>~(scholarValue)</td>
+                        <td>~(submitted)</td>
+                        <td>~(awarded)</td>
+                        <td>~(conditions)</td>
+                    </tr> [/tlist_sql] </tbody>
+            </table>
+        </div>
+        <br>
+        <div id="Certificates">
+            <table class="grid" id="CertificatesTable">
+                <thead>
+                    <tr style="border:1px solid grey;">
+                        <th class="bold" width="5%">ID</th>
+                        <th class="bold" width="20%">Certificate</th>
+                        <th class="bold" width="10%">Level</th>
+                        <th class="bold" width="10%">Website</th>
+                        <th class="bold" width="5%">Credit Hours</th>
+                        <th class="bold" width="10%">Completion Date</th>
+                        <th class="bold" width="10%">Expiry Date</th>
+                        <th class="bold" width="10%">Course Affiliation</th>
+                        <th class="bold" width="20%">Comments</th>
+                    </tr>
+                </thead>
+                <tbody>~[tlist_sql; select ID, certificateName, certLevel, certURL, creditHours, completionDate, expiryDate, certCourse, certComment FROM U_CERTIFICATES SC WHERE StudentsDCID = ~(rn) ORDER BY ID]
+                    <tr>
+                        <td>~(ID)</td>
+                        <td>~(certificateName)</td>
+                        <td>~(certLevel)</td>
+                        <td>~(certURL)</td>
+                        <td>~(creditHours)</td>
+                        <td>~(completionDate;d)</td>
+                        <td>~(expiryDate;d)</td>
+                        <td>~(certCourse)</td>
+                        <td>~(certComment)</td>
+                    </tr> [/tlist_sql] </tbody>
+            </table>
+        </div>
+        <div id="Volunteerism">
+            <table class="grid" id="VolunteerismTable">
+                <thead>
+                    <tr style="border:1px solid grey;">
+                        <th class="bold" width="5%">ID</th>
+                        <th class="bold" width="15%">Organization/Event/Person</th>
+                        <th class="bold" width="15%">Description</th>
+                        <th class="bold" width="5%">Hours</th>
+                        <th class="bold" width="5%">Frequency</th>
+                        <th class="bold" width="10%">Start Date</th>
+                        <th class="bold" width="10%">End Date</th>
+                        <th class="bold" width="15%">Supervisor</th>
+                        <th class="bold" width="10%">Phone</th>
+                        <th class="bold" width="10%">Email</th>
+                    </tr>
+                </thead>
+                <tbody>~[tlist_sql; select ID, location, description, hours, CASE frequency WHEN '1' THEN 'Single Occurance' WHEN '2' THEN 'Weekly' WHEN '3' THEN 'Biweekly' WHEN '4' THEN 'Monthly' ELSE '' END frequency, startDate, endDate, supervisor, supPhone, supEmail FROM U_VOLUNTEERISM SV WHERE StudentsDCID = ~(rn) ORDER BY ID]
+                    <tr>
+                        <td>~(ID)</td>
+                        <td>~(location)</td>
+                        <td>~(description)</td>
+                        <td>~(hours)</td>
+                        <td>~(frequency)</td>
+                        <td>~(startDate;d)</td>
+                        <td>~(endDate;d)</td>
+                        <td>~(supervisor)</td>
+                        <td>~(supPhone)</td>
+                        <td>~(supEmail)</td>
+                    </tr> [/tlist_sql] </tbody>
+            </table>
+        </div>
+    </div>
+    ~[wc:teachers_footer_fr_css]
+</body>
+
+</html>
