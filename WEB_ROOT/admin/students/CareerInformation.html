@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Career Information Tracker Created by Cruise Slater - v1.0 01/01/2016  -->
+<!-- Future Version Comments -->
+
+	<title>Career Information Tracker</title>
+<!-- required scripts -->
+	~[wc:commonscripts] 
+<!-- Required style sheets: screen.css, and print.css -->
+	<link href="/images/css/screen.css" rel="stylesheet" media="screen">
+	<link href="/images/css/print.css" rel="stylesheet" media="print">
+	<script src="/scripts/tlistCustomization.js"></script>
+</head> 
+<body> 
+	~[wc:admin_header_frame_css]
+	<!-- breadcrumb start -->
+		<a href="/admin/home.html" target="_top">Start Page</a> &gt; <a href="/admin/students/home.html?selectstudent=nosearch" target="_top">Student Selection</a> &gt; Career Information Tracker
+	<!-- breadcrumb end -->
+~[wc:admin_navigation_frame_css]
+<!-- start of main menu and content -->
+~[wc:title_student_begin_css]Career Information~[wc:title_student_end_css]
+<form action="/~[self.page]?frn=~(studentfrn)&changesSaved=true" method="POST">
+<!-- start of content area -->
+~[if.~(gpv.changesSaved)=true]<div class="feedback-confirm">~[text:psx.common.changes_recorded]</div>[/if]
+<div class="tabs">
+    <ul class="group">
+        <li><a href="#SecondaryApplications">Secondary Applications</a></li>
+        <li><a href="#Certificates">Certificates</a></li>
+        <li><a href="#Volunteerism">Volunteerism</a></li>
+    </ul>
+    <div id="SecondaryApplications">
+			<div class="box-round">
+				<h2>Applications</h2>
+				<p> ~[tlist_child:STUDENTS.U_CAREERINFORMATION.U_SECONDARYAPPLICATIONS; displaycols: institution, requestDate, appStatus, scholarship, completionDate, instituteOutcome, studentDecision, appComment; fieldNames: Institution, Request Date, Application Status, Scholarship?, Completion Date, Institute Outcome, Student Decision, Comments; type:html]
+					<script>
+						var appStatusDD = {};
+						appStatusDD['1']='Meeting with student';
+						appStatusDD['2']='Working on application';
+						appStatusDD['3']='Completed (Not Submitted)';
+						appStatusDD['4']='Submitted';
+						tlistText2DropDown('appStatus',appStatusDD);
+						var instituteOutcomeDD = {};
+						instituteOutcomeDD['1']='Awaiting Response';
+						instituteOutcomeDD['2']='Condtional Acceptance';
+						instituteOutcomeDD['3']='Accepted';
+						instituteOutcomeDD['4']='Rejected';
+						tlistText2DropDown('instituteOutcome',instituteOutcomeDD);
+						var studentDecisionDD = {};
+						studentDecisionDD['1']='Awaiting Response';
+						studentDecisionDD['2']='Considering';
+						studentDecisionDD['3']='Accepting';
+						studentDecisionDD['4']='Rejecting';
+						tlistText2DropDown('studentDecision',studentDecisionDD);
+					</script>
+				</p> 
+			</div>
+			<div class="box-round">
+				<h2>Scholarships</h2> 
+				<p>~[tlist_child:STUDENTS.U_CAREERINFORMATION.U_SCHOLARSHIP; displaycols: scholarship, scholarURL, scholarValue, submitted, awarded, conditions; fieldNames: Scholarship, Website, Monetary Value, Submitted?, Awarded?, Conditions; type:html]
+				</p> 
+			</div>
+
+~[if.pref.bandfunding=1]
+		<div class="box-round">
+		<h2 class="toggle collapsed">Funding/Support through Band</h2>
+		~[tlist_child:STUDENTS.U_CAREERINFORMATION.U_BANDSUPPORT; displaycols: bandApp, band, appDate, bandApproval, subInstitute, tuitionDeposit; fieldNames: Application submitted to Band?, Band Affiliation, Application Date, Band Approval?, Submitted to Institute?, Tuition Deposited; type:html]
+					<script>
+						var tuitionDepositDD = {};
+						tuitionDepositDD['1']='Awaiting Funding';
+						tuitionDepositDD['2']='Payed';
+						tuitionDepositDD['3']='Not Payed';
+						tlistText2DropDown('tuitionDeposit',tuitionDepositDD);
+					</script>
+		</div>
+[/if]
+	</div>
+	<div id="Certificates">
+		<p>~[tlist_child:STUDENTS.U_CAREERINFORMATION.U_CERTIFICATES; displaycols: certificateName, certLevel, certURL, creditHours, completionDate, expiryDate, certCourse, certComment; fieldNames: Certificate, Level, Website, Credit Hours, Completion Date, Expiry Date, Course Affiliation, Comments; type:html]
+		</p> 
+    </div>
+    <div id="Volunteerism">
+        <p>~[tlist_child:STUDENTS.U_CAREERINFORMATION.U_VOLUNTEERISM; displaycols: location, description, hours, frequency, startDate, endDate, supervisor, supPhone, supEmail; fieldNames: Organization/Event/Person, Description, Hours, Frequency, Start Date, End Date, Supervisor, Phone, Email; type:html]
+			<script>
+				var frequencyDD = {};
+				frequencyDD['1']='Single Occurance';
+				frequencyDD['2']='Weekly';
+				frequencyDD['3']='Biweekly';
+				frequencyDD['3']='Monthly';
+				tlistText2DropDown('frequency',frequencyDD);
+			</script>
+		</p> 
+    </div>
+</div>
+<div class="button-row">
+<input type="hidden" name="ac" value="prim">~[submitbutton]
+</div>	
+</form>
+<!-- end of content area -->
+	~[wc:admin_footer_frame_css]
+</body> 
+</html>

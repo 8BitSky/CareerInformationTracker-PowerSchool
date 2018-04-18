@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<psExtension xmlns="http://www.powerschool.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.powerschool.com psextension.xsd">
+    <extensionname>U_CareerInformation</extensionname>
+    <extendedTable type="standalone" dbTableName="U_CAREERINFORMATION" childName="U_CAREERINFORMATION" comment="Contains system wide variables for the Career Information Plugin">
+        <field name="DisplayBand" type="Boolean" defaultValue="1" comment="This field allows users to toggle the &quot;Funding/Support through Band&quot; section under the secondary applications tab. "/>
+        <field name="displaybandfunding" type="Integer" defaultValue="0"/>
+    </extendedTable>
+    <extendedTable coreTable="Students" dbTableName="U_Certificates" childName="U_Certificates" comment="Ext Table for Career Information Plugin. Contains fields related to certificate tracking and completion of hours. ">
+        <field name="expiryDate" type="Date" comment="Expiry date for certificate"/>
+        <field name="certURL" type="String" length="200" comment="Certificate URL"/>
+        <field name="completionDate" type="Date" comment="Date of completion for certificate"/>
+        <field name="certLevel" type="String" length="50" comment="Secondary Certificate Information (Level)"/>
+        <field name="certificateName" type="String" length="100" comment="Primary certificate name"/>
+        <field name="certComment" type="String" length="150" comment="Additional information regarding certificate"/>
+        <field name="certCourse" type="String" length="50" comment="Field to track potential curricular linkage"/>
+        <field name="creditHours" type="Double" comment="Credit Hours earned through certificate/program"/>
+    </extendedTable>
+    <extendedTable coreTable="Students" dbTableName="U_SecondaryApplications" childName="U_SecondaryApplications" comment="Ext Table for Career Information Plugin. Contains fields related to secondary school options.">
+        <field name="institution" type="String" length="100" comment="Field to track institutes name (Application)"/>
+        <field name="instituteOutcome" type="String" length="50" comment="Field to track outcome of Institution "/>
+        <field name="appComment" type="String" length="150" comment="Field to track additional comments during the application process"/>
+        <field name="completionDate" type="Date" comment="Date of completion of application process"/>
+        <field name="scholarship" type="Boolean" comment="Simple tracker for scholarship potential"/>
+        <field name="requestDate" type="Date" comment="Date of request to begin process of application"/>
+        <field name="appStatus" type="String" length="50" comment="Field to track status of application"/>
+        <field name="studentDecision" type="String" length="50" comment="Field to track decision of student in regards to Institution outcome"/>
+    </extendedTable>
+    <extendedTable coreTable="Students" dbTableName="U_Volunteerism" childName="U_Volunteerism" comment="Ext Table for Career Information Plugin. Contains fields related to volunteerism in relation to curricular goals..">
+        <field name="hours" type="Double" comment="Volunteer hours completed"/>
+        <field name="endDate" type="Date" comment="End Date"/>
+        <field name="description" type="String" length="200" comment="Short description of volunteer experience"/>
+        <field name="location" type="String" length="100" comment="Organization, location and/or group "/>
+        <field name="supPhone" type="String" length="10" comment="Supervisor phone contact"/>
+        <field name="startDate" type="Date" comment="Start Date"/>
+        <field name="supervisor" type="String" length="60" defaultValue="(last, first)" comment="Field to track supervisor of hours&#xA;"/>
+        <field name="frequency" type="String" length="50" comment="Frequency of volunteering "/>
+        <field name="supEmail" type="String" length="50" comment="Supervisor email contact"/>
+    </extendedTable>
+    <extendedTable coreTable="Students" dbTableName="U_Scholarship" childName="U_Scholarship" comment="Ext Table for Career Information Plugin. Contains fields related to scholarship applications.">
+        <field name="scholarURL" type="String" length="300" comment="Field to track URL for scholarship"/>
+        <field name="submitted" type="Boolean" comment="Simple tracker for submission status of scholarship"/>
+        <field name="awarded" type="Boolean" comment="Simple tracker for awarded status of scholarship"/>
+        <field name="scholarship" type="String" length="100" comment="Field to track scholarship name"/>
+        <field name="scholarValue" type="Double" comment="Monetary value of scholarship "/>
+        <field name="conditions" type="String" length="150" comment="Field to track conditional statements tied to the scholarship"/>
+    </extendedTable>
+    <extendedTable coreTable="PREFS" dbTableName="U_CareerInfoPref" childName="U_CareerInfoPref" comment="">
+        <field name="displayBandSupport" type="Boolean" defaultValue="1"/>
+    </extendedTable>
+    <extendedTable coreTable="Students" dbTableName="U_BandSupport" childName="U_BandSupport" comment="Ext Table for Career Information Plugin. Contains fields related to secondary funding support through band affiliation. ">
+        <field name="bandApproval" type="Boolean" comment="Simple tracker for Band approval of request"/>
+        <field name="tuitionDeposit" type="String" length="40" comment="Field to track tuition submission status"/>
+        <field name="subInstitute" type="Boolean" comment="Simple tracker for submission status to applied Institute"/>
+        <field name="bandApp" type="Boolean" comment="Simple tracker for Band application for funding"/>
+        <field name="band" type="String" length="60" comment="Field to track Band affiliation "/>
+        <field name="appDate" type="Date" comment="Field to track application to Band"/>
+    </extendedTable>
+    <extendedTable coreTable="PREFS" dbTableName="U_CAREERINFOPREFS" comment="">
+        <field name="displayBandSupport" type="Boolean" defaultValue="1"/>
+    </extendedTable>
+</psExtension>

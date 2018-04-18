@@ -1,0 +1,5 @@
+<!-- Career Information Tracker Created by Cruise Slater -->
+<!--  v1.0.0 12/15/15 This page fragment links to the plugin's preference page (CareerInfo_Pref.html). JQuery Snippet Credit: Jason Springel -->
+<script>
+$j("[href$='district-registration.html']").parent().parent().before('<tr><td><a href="/admin/district/CareerInfo_Pref.html">Career Information Plugin Settings</a></td><td>Manage various plugin settings.</td></tr></td></tr>');
+</script>
